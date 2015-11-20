@@ -12,23 +12,24 @@ REM 查找原APK文件
 call :FIND_APK %scan_dir%\src
 set dst_apk=%src_apk%
 set full_dst_apk=%base_dir%%dst_apk%
-REM 拷贝原APK
-@echo 正在拷贝原APK...
-REM 遍历渠道目录
-@echo 正在查找渠道文件...
+set full_src_apk=%scan_dir%\src\%src_apk%
+	REM 拷贝原APK
+	@echo 正在拷贝原APK...
+	REM 遍历渠道目录
+	@echo 正在查找渠道文件...
 	call :CREATE_INF %channel_list% %work_path%
-@echo 正在生成渠道文件...
-for /f "delims=" %%b in ('dir /b/a-d/oN %work_path%')  do ( 
-copy /y  %src_apk% %full_dst_apk%
-echo %channel_dir%\%%b
-@echo 正在打包文件...
-aapt a %dst_apk% %channel_dir%\%%b
+	@echo 正在生成渠道文件...
+for /f "delims=" %%b in ('dir /b/oN %work_path%')  do ( 
+	copy /y  %full_src_apk% %full_dst_apk%
+	echo %channel_dir%\%%b
+	@echo 正在打包文件...
+	aapt a %dst_apk% %channel_dir%\%%b
 	call :MOVE_FILE %full_dst_apk% %out_dir%%src_apk_name%_%%b%apk_ext%
 @echo 正在清理临时文件...
 	call :DEL_FILE %base_dir%%channel_dir%\%%b
 ) 
 @echo 打包完成...
-exit
+pause
 
 
 
