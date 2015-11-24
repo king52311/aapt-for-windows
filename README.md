@@ -14,7 +14,7 @@ SRC_APK_DIR = './src/'
 OUT_APK_DIR = './out/'
 # just only filename extension 
 SCAN_FILE_EXT = '.apk'
-```python
+```
 ###Basic Methods###
 ```python
 >>> 
@@ -24,7 +24,7 @@ channel: wandoujia build complete
 channel: 163 build complete
 channel: alipay build complete
 >>> 
-```python
+```
 
 
 
